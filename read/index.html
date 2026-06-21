@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>No One Is Driving — The Captured Mind & How to Get It Back</title>
+<meta name="description" content="A systems read on how attention, reward and the sovereign individual get captured — and the proven science of recalibration.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0b0d;
+    --bg-soft:#101216;
+    --panel:#14171c;
+    --panel-2:#181c22;
+    --line:#262b33;
+    --ink:#e9e6df;
+    --ink-soft:#a7a59d;
+    --ink-faint:#6f6e68;
+    --signal:#e0a64d;     /* the red dot / supernormal */
+    --signal-2:#f2c879;
+    --cool:#6fb7b0;       /* recalibration / cure */
+    --cool-2:#9fd6cf;
+    --danger:#cf6b5a;
+    --maxw:760px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font-family:'Spectral',Georgia,serif;font-weight:300;
+    font-size:19px;line-height:1.62;-webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  ::selection{background:rgba(224,166,77,.28)}
+
+  /* progress + nav */
+  #progress{position:fixed;top:0;left:0;height:2px;width:0;background:linear-gradient(90deg,var(--signal),var(--cool));z-index:100;transition:width .1s linear}
+  nav{position:fixed;top:0;right:0;left:0;z-index:90;display:flex;justify-content:space-between;align-items:center;
+    padding:14px 24px;backdrop-filter:blur(8px);background:rgba(10,11,13,.55);border-bottom:1px solid transparent;transition:border-color .3s}
+  nav.scrolled{border-color:var(--line)}
+  nav .brand{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.18em;color:var(--ink-faint);text-transform:uppercase;text-decoration:none;transition:color .2s}
+  nav .brand:hover{color:var(--signal-2)}
+  nav .links a.ext{color:var(--cool)}
+  nav .links a.ext:hover{color:var(--cool-2)}
+  nav .links{display:flex;gap:20px}
+  nav .links a{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;color:var(--ink-soft);text-decoration:none;text-transform:uppercase;transition:color .2s}
+  nav .links a:hover{color:var(--signal-2)}
+  @media(max-width:680px){nav .links{display:none}}
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  section{padding:90px 0;border-bottom:1px solid var(--line)}
+  section:last-of-type{border-bottom:none}
+
+  /* hero */
+  .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;position:relative;border-bottom:1px solid var(--line);overflow:hidden}
+  .hero canvas{position:absolute;inset:0;z-index:0;opacity:.5}
+  .hero .wrap{position:relative;z-index:2}
+  .kicker{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.25em;text-transform:uppercase;color:var(--signal);margin-bottom:26px}
+  h1{font-weight:300;font-size:clamp(2.6rem,7vw,4.6rem);line-height:1.04;margin:0 0 26px;letter-spacing:-.02em}
+  h1 em{font-style:italic;color:var(--signal-2)}
+  .lede{font-size:1.28rem;color:var(--ink-soft);max-width:620px;line-height:1.5}
+  .scroll-cue{margin-top:54px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.2em;color:var(--ink-faint);text-transform:uppercase;animation:pulse 2.6s ease-in-out infinite}
+  @keyframes pulse{0%,100%{opacity:.35}50%{opacity:.9}}
+
+  h2{font-weight:400;font-size:clamp(1.7rem,4vw,2.4rem);line-height:1.12;margin:0 0 8px;letter-spacing:-.01em}
+  .sec-kicker{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:18px}
+  .sec-kicker.cool{color:var(--cool)}
+  .sec-kicker.warm{color:var(--signal)}
+  p{margin:0 0 20px}
+  p .hl{color:var(--ink);border-bottom:1px solid rgba(224,166,77,.4)}
+  strong{font-weight:600;color:#fff}
+  em.q{font-style:italic;color:var(--cool-2)}
+
+  /* reframe toggle */
+  .reframe{margin:34px 0 6px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--panel)}
+  .toggle{display:flex;border-bottom:1px solid var(--line)}
+  .toggle button{flex:1;background:none;border:none;color:var(--ink-faint);font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;padding:16px;cursor:pointer;transition:all .25s}
+  .toggle button.active{color:var(--ink);background:var(--panel-2)}
+  .toggle button:first-child.active{box-shadow:inset 0 -2px 0 var(--danger);color:var(--danger)}
+  .toggle button:last-child.active{box-shadow:inset 0 -2px 0 var(--cool);color:var(--cool-2)}
+  .reframe-body{padding:26px 28px;font-size:1.05rem;line-height:1.6}
+  .reframe-body .big{font-size:1.2rem;color:var(--ink);margin-bottom:14px;font-weight:400}
+  .reframe-body .tag{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint)}
+
+  /* the stack */
+  .stack-frame{margin:30px 0 10px;position:relative}
+  .axis{position:absolute;left:-4px;top:0;bottom:0;width:1px;background:linear-gradient(180deg,var(--signal),var(--line));display:none}
+  .threat{border:1px solid var(--line);border-radius:13px;margin-bottom:14px;background:var(--panel);overflow:hidden;transition:border-color .25s,transform .25s}
+  .threat:hover{border-color:#36404a}
+  .threat.open{border-color:var(--signal)}
+  .threat-head{display:flex;align-items:center;gap:18px;padding:20px 22px;cursor:pointer;user-select:none}
+  .rank{font-family:'JetBrains Mono',monospace;font-size:1.5rem;color:var(--signal);min-width:34px;font-weight:500}
+  .threat.t2 .rank{color:var(--signal-2)}
+  .threat.t3 .rank{color:#cdae7f}
+  .threat.t4 .rank{color:#b8a487}
+  .threat.t5 .rank{color:#9c9484}
+  .threat-title{flex:1}
+  .threat-title .name{font-size:1.18rem;color:var(--ink);font-weight:400}
+  .threat-title .sub{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);margin-top:3px}
+  .chev{color:var(--ink-faint);transition:transform .3s;font-size:1.1rem}
+  .threat.open .chev{transform:rotate(90deg);color:var(--signal)}
+  .threat-body{max-height:0;overflow:hidden;transition:max-height .4s ease}
+  .threat-body-inner{padding:2px 22px 24px 74px;font-size:1.02rem;color:var(--ink-soft);line-height:1.58}
+  .threat-body-inner p{margin-bottom:14px}
+  .mech{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--signal);border:1px solid rgba(224,166,77,.3);border-radius:4px;padding:2px 8px;margin-bottom:12px}
+  .cite{font-size:.86rem;color:var(--ink-faint);font-style:italic;border-left:2px solid var(--line);padding-left:12px;margin-top:8px}
+
+  /* master key */
+  .key-visual{display:flex;align-items:center;justify-content:center;gap:40px;margin:40px 0;flex-wrap:wrap}
+  .dot-wrap{text-align:center}
+  .dot{border-radius:50%;margin:0 auto 14px}
+  .dot.real{width:46px;height:46px;background:#7a3b34}
+  .dot.fake{width:84px;height:84px;background:var(--signal);box-shadow:0 0 0 0 rgba(224,166,77,.5);animation:ping 2.4s ease-out infinite}
+  @keyframes ping{0%{box-shadow:0 0 0 0 rgba(224,166,77,.45)}70%{box-shadow:0 0 0 26px rgba(224,166,77,0)}100%{box-shadow:0 0 0 0 rgba(224,166,77,0)}}
+  .dot-label{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint)}
+
+  /* recalibration */
+  .filter-row{display:flex;gap:8px;flex-wrap:wrap;margin:26px 0 22px}
+  .filter-row button{background:none;border:1px solid var(--line);color:var(--ink-faint);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:8px 14px;border-radius:20px;cursor:pointer;transition:all .2s}
+  .filter-row button:hover{color:var(--ink-soft)}
+  .filter-row button.active{background:var(--cool);color:#0a0b0d;border-color:var(--cool);font-weight:500}
+  .cure{border:1px solid var(--line);border-radius:13px;margin-bottom:13px;background:var(--panel);padding:22px;transition:opacity .3s,transform .3s,border-color .25s}
+  .cure:hover{border-color:#33403d}
+  .cure.hide{display:none}
+  .cure-top{display:flex;align-items:center;gap:14px;margin-bottom:10px;flex-wrap:wrap}
+  .cure-name{font-size:1.15rem;color:var(--ink);font-weight:400;flex:1;min-width:180px}
+  .tier{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;padding:3px 9px;border-radius:4px;font-weight:500}
+  .tier.bedrock{background:rgba(111,183,176,.16);color:var(--cool-2);border:1px solid rgba(111,183,176,.4)}
+  .tier.strong{background:rgba(111,183,176,.09);color:var(--cool);border:1px solid rgba(111,183,176,.25)}
+  .tier.moderate{background:rgba(224,166,77,.1);color:var(--signal-2);border:1px solid rgba(224,166,77,.3)}
+  .tier.weak{background:rgba(207,107,90,.1);color:var(--danger);border:1px solid rgba(207,107,90,.3)}
+  .cure-body{font-size:1rem;color:var(--ink-soft);line-height:1.56}
+  .cure-body .why{color:var(--ink);font-weight:400}
+  .honest{margin-top:10px;font-size:.88rem;color:var(--ink-faint);font-style:italic}
+  .honest::before{content:"⚖ honest read — ";font-style:normal;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--cool)}
+
+  /* protocol */
+  .proto{counter-reset:step;margin:28px 0 0;padding:0;list-style:none}
+  .proto li{position:relative;padding:18px 0 18px 58px;border-bottom:1px solid var(--line)}
+  .proto li:last-child{border-bottom:none}
+  .proto li::before{counter-increment:step;content:counter(step);position:absolute;left:0;top:16px;width:36px;height:36px;border-radius:50%;border:1px solid var(--cool);color:var(--cool-2);font-family:'JetBrains Mono',monospace;display:flex;align-items:center;justify-content:center;font-size:1rem}
+  .proto li .ph{color:var(--ink);font-weight:500}
+  .proto li .pd{color:var(--ink-soft);font-size:.98rem}
+
+  .pull{font-size:1.5rem;line-height:1.4;color:var(--ink);font-weight:300;border-left:2px solid var(--signal);padding:6px 0 6px 26px;margin:34px 0}
+  .pull em{font-style:italic;color:var(--signal-2)}
+
+  /* close */
+  .close{text-align:center;padding:110px 24px}
+  .close .big{font-size:clamp(1.8rem,5vw,2.8rem);font-weight:300;line-height:1.2;margin-bottom:20px}
+  .close .big em{color:var(--cool-2);font-style:italic}
+  .close .sub{color:var(--ink-soft);max-width:480px;margin:0 auto;font-size:1.05rem}
+  footer{padding:30px 24px 60px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;color:var(--ink-faint);text-transform:uppercase}
+
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  /* ---------- mobile ---------- */
+  @media(max-width:600px){
+    body{font-size:17px}
+    section{padding:62px 0}
+    .wrap{padding:0 18px}
+    .hero{min-height:92vh}
+    .lede{font-size:1.1rem}
+    h1{font-size:clamp(2.1rem,10vw,3rem)}
+    nav{padding:11px 16px}
+    nav .brand{font-size:11px}
+    .threat-head{gap:12px;padding:16px 15px}
+    .rank{font-size:1.2rem;min-width:24px}
+    .threat-title .name{font-size:1.04rem}
+    .threat-body-inner{padding:2px 16px 20px 17px}
+    .key-visual{gap:22px;margin:30px 0}
+    .reframe-body{padding:20px 17px}
+    .reframe-body .big{font-size:1.08rem}
+    .toggle button{font-size:10px;padding:13px 8px;letter-spacing:.06em}
+    .cure{padding:18px 16px}
+    .cure-name{font-size:1.06rem}
+    .proto li{padding:16px 0 16px 50px}
+    .proto li::before{width:32px;height:32px;font-size:.9rem}
+    .pull{font-size:1.18rem;padding-left:18px}
+    .close{padding:80px 18px}
+  }
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<nav id="nav">
+  <a class="brand" href="../" title="back to menu">⊞ // the captured mind</a>
+  <span class="links">
+    <a href="#stack">the stack</a>
+    <a href="#key">the key</a>
+    <a href="#recal">recalibration</a>
+    <a href="#protocol">protocol</a>
+    <a class="ext" href="/things/">clarity ↗</a>
+    <a class="ext" href="../">menu</a>
+  </span>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <canvas id="field"></canvas>
+  <div class="wrap">
+    <div class="kicker">A systems read on attention, reward &amp; the self</div>
+    <h1>No one is driving.<br>It's <em>still going</em> here.</h1>
+    <p class="lede">The phenomena are real. The conductor isn't. What captures the modern individual is designed at the component and emergent at the whole — ten thousand hands optimising locally, with the loss of the sovereign self as the byproduct nobody chose and no one can switch off.</p>
+    <div class="scroll-cue">scroll ↓</div>
+  </div>
+</header>
+
+<!-- REFRAME -->
+<section id="reframe">
+  <div class="wrap reveal">
+    <div class="sec-kicker">01 — the reframe</div>
+    <h2>Designed vs. emergent</h2>
+    <p>The seductive story is a cabal: someone built this to control you. The honest story is worse. A cybernetic system can be exquisitely controlling <em class="q">with no one at the controls</em> — the way a market is, or an ecosystem. The control is real. The steering is real. There is no steering wheel.</p>
+    <p>Why this matters: a conspiracy has a head you can cut off. You can jail a Sackler, leak an NSA, expose an MKULTRA — and the big ones always leak, because secrets don't hold across decades and rival nations. An emergent incentive gradient has no Sackler and no document, because the document was never written. There is nobody to depose.</p>
+
+    <div class="reframe">
+      <div class="toggle">
+        <button id="btn-cons" class="active" onclick="setFrame('cons')">The conspiracy story</button>
+        <button id="btn-emer" onclick="setFrame('emer')">The emergent story</button>
+      </div>
+      <div class="reframe-body" id="frame-body"></div>
+    </div>
+    <p style="margin-top:24px">Believing in the hidden hand is itself the dopamine move: the brain is a hyperactive agency-detector, and <span class="hl">"someone did this on purpose" is cheaper and more satisfying than "no one is driving and it still arrived here."</span> The conspiracy is the comfortable answer that closes the gap. The uncomfortable one is the true one.</p>
+  </div>
+</section>
+
+<!-- THE STACK -->
+<section id="stack">
+  <div class="wrap reveal">
+    <div class="sec-kicker warm">02 — the threat stack</div>
+    <h2>Ranked by depth into agency</h2>
+    <p>Not by how scary it sounds. A threat to your wallet is recoverable. A threat to your attention is worse — attention is the tool you'd use to fix the wallet. A threat to <em class="q">what you're able to want</em> is worst of all, because it disables your appetite for the things that would heal you. The deeper into the agency stack, the more dangerous. Tap each layer.</p>
+    <div class="stack-frame" id="stack-list"></div>
+    <p style="margin-top:24px;color:var(--ink-faint);font-size:.95rem">Outer ring — real but recoverable with the controller intact: the automation/work treadmill, inflation forcing productivity, consumerism. Downstream. A person with calibrated reward and intact attention can navigate them; a person without can navigate nothing.</p>
+  </div>
+</section>
+
+<!-- MASTER KEY -->
+<section id="key">
+  <div class="wrap reveal">
+    <div class="sec-kicker warm">03 — the master key</div>
+    <h2>One exploit under all of it</h2>
+    <div class="key-visual">
+      <div class="dot-wrap"><div class="dot real"></div><div class="dot-label">the real signal</div></div>
+      <div class="dot-wrap"><div class="dot fake"></div><div class="dot-label">the supernormal one</div></div>
+    </div>
+    <p>Tinbergen's gull pecks the <strong>fake, exaggerated red dot</strong> harder than its own mother's beak. A supernormal stimulus is an artificial trigger louder than the thing an instinct evolved for — and the animal can't not respond.</p>
+    <p>Every threat on the stack is the same move: <span class="hl">a supernormal stimulus fed to a reward-and-attention system built for a slow, scarce, honest-signal world.</span> Porn, infinite feeds, slot-machine notifications, outrage, hyperpalatable food — all the fake red dot, pecked harder than the real thing. Our hardware assumes signals are rare and truthful. The environment now makes them engineered and infinite. That mismatch is the whole exploit.</p>
+  </div>
+</section>
+
+<!-- RECALIBRATION -->
+<section id="recal">
+  <div class="wrap reveal">
+    <div class="sec-kicker cool">04 — recalibration</div>
+    <h2>What's actually proven</h2>
+    <p>The field is mostly slop, so each lever is graded by evidence weight, not by how good it sounds. The mechanism is two moves at once: <strong>lower the input ceiling</strong> so baseline sensitivity recovers, and <strong>re-present the natural rewards</strong> the system evolved for, so the circuit re-learns to value them. You widen the dynamic range from both ends. And the clock is real — attention recovers in days to weeks, reward in <span class="hl">roughly 4–8+ weeks</span>. The one-day "dopamine fast" is theatre.</p>
+    <div class="filter-row" id="filters">
+      <button class="active" data-tier="all">All</button>
+      <button data-tier="bedrock">Bedrock</button>
+      <button data-tier="strong">Strong</button>
+      <button data-tier="moderate">Moderate</button>
+      <button data-tier="weak">Be skeptical</button>
+    </div>
+    <div id="cure-list"></div>
+  </div>
+</section>
+
+<!-- PROTOCOL -->
+<section id="protocol">
+  <div class="wrap reveal">
+    <div class="sec-kicker cool">05 — the protocol</div>
+    <h2>Fixed from the top</h2>
+    <p>You can't out-discipline a miscalibrated reward system — willpower runs on the same circuit that's been turned against you. So you don't start at the wallet. You start at the reward substrate and let the repair cascade down. The order of the threats, reversed, <em class="q">is</em> the order of the cure.</p>
+    <ol class="proto">
+      <li><span class="ph">Sleep first.</span> <span class="pd">Non-negotiable substrate. It restores prefrontal control and resets reward reactivity. Everything else fails on a sleep debt.</span></li>
+      <li><span class="ph">Remove supernormal inputs by environment, not willpower.</span> <span class="pd">Grayscale, delete the app, phone out of the room. Friction beats resolve every time.</span></li>
+      <li><span class="ph">Move daily — aerobic.</span> <span class="pd">Re-trains the effort→reward circuit and lifts baseline attention.</span></li>
+      <li><span class="ph">Reintroduce effortful, delayed-reward activity.</span> <span class="pd">Long reading, a craft, real people. Behavioural activation: re-teach the system that slow rewards are rewards.</span></li>
+      <li><span class="ph">Train attention directly &amp; protect boredom.</span> <span class="pd">Focused practice for the muscle; unstructured empty time for the self to reassemble.</span></li>
+    </ol>
+    <div class="pull">Give it <em>six to eight weeks</em> before you judge it. Receptors recover on biology's clock, not yours.</div>
+  </div>
+</section>
+
+<!-- CLOSE -->
+<section class="close reveal">
+  <div class="big">The sovereign self isn't taken by a cabal.<br>It's <em>surrendered by default</em>, a thousand times a day —<br>and reclaimed the same way.</div>
+  <p class="sub">Notice the response is identical whether it's a conspiracy or an emergent trap. That's the tell. The metaphysics of <em>who</em> is a distraction from the protocol.</p>
+</section>
+
+<footer>// real over impressive — built for marcus</footer>
+
+<script>
+/* ---------- content ---------- */
+const FRAMES = {
+  cons:{tag:'requires a conductor',big:'A hidden hand engineered all of it on purpose.',
+    body:"Demands decades of flawless coordination across central banks, tech firms, ad agencies and rival governments — with zero credible leak. Fails three tests: every real conspiracy leaked and was narrow; falling birthrates are a fiscal catastrophe states are desperately trying to <i>reverse</i>; and Sweden, Korea and China share the pattern with opposite ideologies and no shared command. One cabal can't run Stockholm and Seoul and Shenzhen."},
+  emer:{tag:'requires no conductor',big:'Ten thousand hands, each optimising locally, no shared plan.',
+    body:"TikTok's engineers optimise for compulsion. The ad industry manufactures wants. Central banks choose inflation over deflation. Each component is <i>deliberately</i> doing its manipulative part — distributed design with no unifying intent. The capture of the individual is an unowned byproduct that emerges, the way a market price does. Worse than a conspiracy: there's no head to cut off and no off switch."}
+};
+const THREATS = [
+  {n:1,cls:'t1',name:'Reward miscalibration',sub:'the dopamine system · the master threat',mech:'variable-ratio reinforcement',
+   body:["Dopamine isn't pleasure — it's <b>reward prediction error</b> (Schultz). It fires for the <i>gap</i> between expected and actual reward, which is why unpredictability is the active ingredient. Variable-ratio reinforcement — the slot-machine schedule — is the single most extinction-resistant pattern in all of operant conditioning. Feeds, matches, likes and notifications run it on purpose.",
+   "The damage isn't wasted time. Your baseline recalibrates upward, and then real rewards — a book, a walk, a slow conversation, deep work — read as flat or aversive by comparison. <b>It poisons the medicine.</b> It makes the antidotes to every other threat feel bad, and you can't willpower out, because willpower runs on the same valuation system that's been turned against you."],
+   cite:'Schultz, dopamine = reward prediction error · Ferster & Skinner, variable-ratio schedules.'},
+  {n:2,cls:'t2',name:'Sustained attention',sub:'the capacity for sequential thought',mech:'continuous partial attention',
+   body:["Complex thought is <i>cumulative</i> — you hold premises in working memory long enough to build the next floor on top. Reasoning, moral deliberation, strategy, long-form argument all need serial, uninterrupted attention. Average sustained attention on a screen fell from ~2.5 minutes (2004) to ~47 seconds, with a ~23-minute cost to fully refocus after each interruption (Gloria Mark).",
+   "Fragment the stream and you don't get dumber — you lose access to an entire <i>class</i> of thoughts that take longer than a clip to form. You become capable only of thoughts that fit between notifications. Dopamine makes you not want to think; attention erosion makes you unable to. Together they remove both the motive and the means to diagnose your own situation."],
+   cite:'Gloria Mark, attention-span and switch-cost research (UC Irvine).'},
+  {n:3,cls:'t3',name:'The abolition of boredom',sub:'the phone as always-on substrate',mech:'precursor-state removal',
+   body:["Boredom is the on-ramp to reflection, planning, daydreaming and the continuous narrative self. The default mode network does its autobiographical and future-planning work in unstimulated time. The phone fills every gap — every queue, every walk, every empty moment — so you never reach the discomfort threshold that historically pushed people into thought.",
+   "You don't lose a faculty. You lose the <i>conditions under which the faculty switches on.</i> A person who is never bored slowly stops being a person who reflects."],
+   cite:'Default mode network / mind-wandering literature. Mechanism is well-supported; the strong "phones killed creativity" claim is more inferential — flagged as such.'},
+  {n:4,cls:'t4',name:'Manufactured social comparison',sub:'the status-anxiety engine',mech:'relative-reference hijack',
+   body:["Human wellbeing is calibrated <i>relatively</i>, not absolutely (Festinger). Your evolved comparison set was ~150 roughly-peer people (Dunbar). Now it's the curated top 0.01% of the species, always. Your reference point becomes structurally unreachable, manufacturing a chronic felt deficit that drives both consumption and anxiety.",
+   "Haidt's teen mental-health inflection after ~2012 — sharpest in girls — is the visible wound. <b>Honest caveat:</b> the timing and correlation are robust, but strict causation is still contested (Odgers and others push back). It corrupts judgement and mood, not the controller itself — which is why it ranks below the top three."],
+   cite:'Festinger, social comparison · Dunbar, ~150 · Haidt, post-2012 inflection (causation debated).'},
+  {n:5,cls:'t5',name:'Supernormal sexual stimuli',sub:'pornography',mech:'novelty conditioning',
+   body:["Tinbergen's supernormal stimulus: the gull pecks the fake exaggerated dot harder than the real beak. Add infinite novelty — the Coolidge effect, renewed arousal with each new partner, weaponised by infinite tabs — and you train the reward system to <i>novelty itself</i> rather than to a person, so real intimacy reads as low-signal.",
+   "Same poison-the-medicine logic as #1, domain-specific. It ranks lowest of the five because the effect is narrower and the human extrapolation from the animal models is more inferential than the attention/dopamine core, which is bedrock."],
+   cite:'Tinbergen, supernormal stimuli · Coolidge effect (robust in animals; human-porn extrapolation is inferential).'}
+];
+const CURES = [
+  {name:'Sleep',tier:'bedrock',why:'The single most evidence-backed lever, and the most underrated.',
+   body:"Sleep deprivation amplifies striatal and amygdala reward reactivity <i>and</i> degrades the prefrontal control that would regulate it (Walker). You wake up wanting junk more and resisting it less. Restores top-down control and resets reward circuitry.",
+   honest:"Bedrock for both attention and reward. Fix this first or nothing downstream holds."},
+  {name:'Aerobic exercise',tier:'bedrock',why:'Lifts dopamine, BDNF and executive attention — acutely and at baseline.',
+   body:"Improves executive attention for ~2 hours after a bout and raises baseline over weeks. It is itself a natural, effortful reward, so it re-trains the effort→reward circuit you're trying to restore.",
+   honest:"Well replicated. Among the highest effect-to-evidence ratios available."},
+  {name:'Stimulus reduction / abstinence',tier:'strong',why:'The real mechanism "dopamine detox" is fumbling toward.',
+   body:"In addiction science, prolonged abstinence partially restores striatal D2/D3 receptor availability over weeks to months (Volkow). Remove the supernormal competitor and tolerance drifts back down.",
+   honest:"Strong for substances; phone/porn is mechanistically continuous but more inferential. The recovery is slow — the one-day fast is theatre, the weeks-long reduction is the real thing."},
+  {name:'Environmental friction (stimulus control)',tier:'strong',why:'Highest leverage per unit of effort.',
+   body:"Willpower is weak; cue-removal is strong. Ward et al. (2017) — the <i>mere presence</i> of your phone on the desk measurably lowers working memory, even powered off. Grayscale, delete the app, phone charges in another room.",
+   honest:"This is straight CBT stimulus control — very well evidenced. You don't resist the stimulus, you remove it from the environment."},
+  {name:'Focused-attention meditation',tier:'moderate',why:'Trains the exact muscle the feeds atrophy.',
+   body:"Improves sustained and executive attention specifically (Posner/Tang attention-network training; Jha's high-stress military cohorts).",
+   honest:"Effect sizes are modest and the field has real replication problems. The mechanism holds; the magnitude is oversold elsewhere — not here."},
+  {name:'Behavioural activation',tier:'moderate',why:'The clinical treatment for the inability to enjoy slow rewards.',
+   body:"Scheduling meaningful, effortful-reward activity restores reward responsiveness. It is the evidence-based treatment for anhedonia in depression.",
+   honest:"Strong inside clinical depression; generalising it to everyday recalibration is reasonable but a step beyond the trials."},
+  {name:'Nature exposure',tier:'moderate',why:'Directed attention recovers in natural settings.',
+   body:"Attention Restoration Theory (Kaplan): a nature walk beat an urban one on working-memory and attention tests (Berman).",
+   honest:"Real and repeatable, but a modest effect with some replication nuance. Useful, not a cure on its own."},
+  {name:'Literal "dopamine detox"',tier:'weak',why:'Junk as marketed; a real mechanism buried inside.',
+   body:"You can't fast a neurotransmitter, and a day of monk-mode does nothing to receptor density. What's real is the underlying tolerance mechanism — which is the slow stimulus-reduction above, not the one-day ritual.",
+   honest:"Keep the mechanism, bin the framing and the timeline."},
+  {name:'Cold exposure',tier:'weak',why:'Popular, thinly evidenced.',
+   body:"One small study showing a ~250% dopamine rise for hours gets cited everywhere as a baseline reset.",
+   honest:"Intriguing, not bedrock. One study. Flagged honestly rather than parroted."}
+];
+
+/* ---------- render ---------- */
+function setFrame(k){
+  const f=FRAMES[k];
+  document.getElementById('frame-body').innerHTML=
+    '<div class="tag">'+f.tag+'</div><div class="big">'+f.big+'</div><div>'+f.body+'</div>';
+  document.getElementById('btn-cons').classList.toggle('active',k==='cons');
+  document.getElementById('btn-emer').classList.toggle('active',k==='emer');
+}
+setFrame('cons');
+
+const sl=document.getElementById('stack-list');
+THREATS.forEach(t=>{
+  const el=document.createElement('div');
+  el.className='threat '+t.cls;
+  el.innerHTML=
+    '<div class="threat-head"><div class="rank">'+t.n+'</div>'+
+    '<div class="threat-title"><div class="name">'+t.name+'</div><div class="sub">'+t.sub+'</div></div>'+
+    '<div class="chev">›</div></div>'+
+    '<div class="threat-body"><div class="threat-body-inner"><span class="mech">mechanism · '+t.mech+'</span>'+
+    t.body.map(p=>'<p>'+p+'</p>').join('')+'<div class="cite">'+t.cite+'</div></div></div>';
+  const head=el.querySelector('.threat-head');
+  const body=el.querySelector('.threat-body');
+  head.addEventListener('click',()=>{
+    const open=el.classList.contains('open');
+    if(open){el.classList.remove('open');body.style.maxHeight=null;}
+    else{el.classList.add('open');body.style.maxHeight=body.scrollHeight+'px';}
+  });
+  sl.appendChild(el);
+});
+
+const cl=document.getElementById('cure-list');
+CURES.forEach(c=>{
+  const el=document.createElement('div');
+  el.className='cure';el.dataset.tier=c.tier;
+  const tname={bedrock:'Bedrock',strong:'Strong',moderate:'Moderate',weak:'Be skeptical'}[c.tier];
+  el.innerHTML='<div class="cure-top"><div class="cure-name">'+c.name+'</div><span class="tier '+c.tier+'">'+tname+'</span></div>'+
+    '<div class="cure-body"><span class="why">'+c.why+'</span> '+c.body+'<div class="honest">'+c.honest+'</div></div>';
+  cl.appendChild(el);
+});
+document.querySelectorAll('#filters button').forEach(b=>{
+  b.addEventListener('click',()=>{
+    document.querySelectorAll('#filters button').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+    const t=b.dataset.tier;
+    document.querySelectorAll('.cure').forEach(c=>{
+      c.classList.toggle('hide',t!=='all'&&c.dataset.tier!==t);
+    });
+  });
+});
+
+/* ---------- scroll fx ---------- */
+const prog=document.getElementById('progress'),nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement.scrollHeight-window.innerHeight;
+  prog.style.width=(window.scrollY/h*100)+'%';
+  nav.classList.toggle('scrolled',window.scrollY>40);
+});
+const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')})},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(e=>io.observe(e));
+
+/* ---------- hero particle field (drifting signals) ---------- */
+const cv=document.getElementById('field'),ctx=cv.getContext('2d');
+let W,H,pts;
+function seed(){
+  W=cv.width=window.innerWidth;H=cv.height=window.innerHeight;
+  pts=Array.from({length:Math.min(70,Math.floor(W/22))},(_,i)=>({
+    x:Math.abs(Math.sin(i*12.9898)*43758.5)%1*W,
+    y:Math.abs(Math.sin(i*78.233)*43758.5)%1*H,
+    r:1+ (Math.abs(Math.sin(i*3.7)*100)%1)*2,
+    vx:(Math.sin(i*1.3)*0.12),vy:(Math.cos(i*2.1)*0.12)
+  }));
+}
+seed();window.addEventListener('resize',seed);
+function draw(){
+  ctx.clearRect(0,0,W,H);
+  for(let i=0;i<pts.length;i++){
+    const p=pts[i];p.x+=p.vx;p.y+=p.vy;
+    if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;
+    for(let j=i+1;j<pts.length;j++){
+      const q=pts[j],d=Math.hypot(p.x-q.x,p.y-q.y);
+      if(d<130){ctx.strokeStyle='rgba(224,166,77,'+(0.06*(1-d/130))+')';ctx.lineWidth=1;
+        ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);ctx.stroke();}
+    }
+    ctx.fillStyle='rgba(167,165,157,0.5)';ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,7);ctx.fill();
+  }
+  requestAnimationFrame(draw);
+}
+draw();
+</script>
+</body>
+</html>
