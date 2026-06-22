@@ -54,6 +54,13 @@
   footer{position:relative;z-index:2;text-align:center;padding:24px;font-family:'JetBrains Mono',monospace;
     font-size:10px;letter-spacing:.14em;color:var(--ink-faint);text-transform:uppercase}
 
+  @keyframes riseIn{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+  header.top{animation:riseIn .7s ease both}
+  .card{animation:riseIn .75s ease both}
+  .card.cool{animation-delay:.14s}
+  .card.warm{animation-delay:.26s}
+  .mark{animation:riseIn .6s ease both}
+  @media(prefers-reduced-motion:reduce){*{animation:none!important}}
   @media(max-width:560px){
     .shell{padding:0 18px}
     header.top{padding:46px 0 4px}
@@ -91,7 +98,7 @@
       <span class="pad">
         <span class="type">essay · interactive</span>
         <h2>The Captured Mind</h2>
-        <p>A systems read on how attention and reward get captured — no conspiracy, just emergent design — and the proven science of getting the sovereign self back.</p>
+        <p>Why your attention is the most valuable thing you own, what's quietly taking it, and the proven science of getting your focus back.</p>
         <span class="go">read the piece</span>
       </span>
       <span class="arrow">→</span>

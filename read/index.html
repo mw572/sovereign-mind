@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>No One Is Driving — The Captured Mind & How to Get It Back</title>
-<meta name="description" content="A systems read on how attention, reward and the sovereign individual get captured — and the proven science of recalibration.">
+<title>The Attention Problem — what's eating your focus, and how to get it back</title>
+<meta name="description" content="The greatest risk to a person today isn't money or time — it's the slow loss of attention. Here's what's taking it, which threats matter most, and the proven science of getting it back.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -154,6 +154,26 @@
   .close .sub{color:var(--ink-soft);max-width:480px;margin:0 auto;font-size:1.05rem}
   footer{padding:30px 24px 60px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;color:var(--ink-faint);text-transform:uppercase}
 
+  /* stat band */
+  .statband{background:var(--bg-soft);padding:62px 0}
+  .stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:34px}
+  .stat{position:relative;padding-left:18px;opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+  .stat::before{content:"";position:absolute;left:0;top:6px;bottom:6px;width:2px;background:linear-gradient(180deg,var(--signal),transparent)}
+  .stat.in{opacity:1;transform:none}
+  .stat:nth-child(2){transition-delay:.12s}.stat:nth-child(3){transition-delay:.24s}
+  .statnum{font-family:'Spectral',serif;font-weight:300;font-size:clamp(2.6rem,6vw,4rem);line-height:1;color:var(--signal-2);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+  .statlbl{margin-top:12px;color:var(--ink-soft);font-size:.96rem;line-height:1.45}
+  .statcite{margin-top:30px;color:var(--ink-faint);font-size:.82rem;font-style:italic}
+  @media(max-width:640px){.stat-row{grid-template-columns:1fr;gap:26px}.statband{padding:48px 0}}
+
+  /* motion touches */
+  h1 em{background:linear-gradient(100deg,var(--signal-2),var(--signal));-webkit-background-clip:text;background-clip:text}
+  .threat{will-change:transform}
+  .threat:hover{transform:translateY(-2px)}
+  .cure:hover{transform:translateY(-2px)}
+  .dot.fake{cursor:pointer}
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
   .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
   .reveal.in{opacity:1;transform:none}
 
@@ -202,20 +222,32 @@
 <header class="hero">
   <canvas id="field"></canvas>
   <div class="wrap">
-    <div class="kicker">A systems read on attention, reward &amp; the self</div>
-    <h1>No one is driving.<br>It's <em>still going</em> here.</h1>
-    <p class="lede">The phenomena are real. The conductor isn't. What captures the modern individual is designed at the component and emergent at the whole — ten thousand hands optimising locally, with the loss of the sovereign self as the byproduct nobody chose and no one can switch off.</p>
-    <div class="scroll-cue">scroll ↓</div>
+    <div class="kicker">An essay on attention, and getting your focus back</div>
+    <h1>Your attention is the most valuable thing you own.<br>Almost everything now is built to <em>take it</em>.</h1>
+    <p class="lede">Not money, not time — <strong>attention</strong> is the resource under attack, because it's the one you'd use to protect all the others. This is a plain look at what's eating it, which threats actually matter most, and the science that genuinely helps you get it back.</p>
+    <div class="scroll-cue">read on ↓</div>
   </div>
 </header>
+
+<!-- STAT BAND -->
+<section id="stats" class="statband">
+  <div class="wrap">
+    <div class="stat-row">
+      <div class="stat"><div class="statnum" data-to="47" data-suffix="s">0</div><div class="statlbl">average focus on a screen before switching away — down from about 2.5 minutes in 2004</div></div>
+      <div class="stat"><div class="statnum" data-to="2617" data-sep="1">0</div><div class="statlbl">times a day the average person taps, swipes or types on their phone</div></div>
+      <div class="stat"><div class="statnum" data-to="23" data-suffix="m">0</div><div class="statlbl">minutes to fully refocus after a single interruption</div></div>
+    </div>
+    <p class="statcite">Sources: Gloria Mark, UC Irvine (focus span &amp; refocus cost) · dscout phone-touch study. The point isn't the exact figures — it's the direction.</p>
+  </div>
+</section>
 
 <!-- REFRAME -->
 <section id="reframe">
   <div class="wrap reveal">
-    <div class="sec-kicker">01 — the reframe</div>
-    <h2>Designed vs. emergent</h2>
-    <p>The seductive story is a cabal: someone built this to control you. The honest story is worse. A cybernetic system can be exquisitely controlling <em class="q">with no one at the controls</em> — the way a market is, or an ecosystem. The control is real. The steering is real. There is no steering wheel.</p>
-    <p>Why this matters: a conspiracy has a head you can cut off. You can jail a Sackler, leak an NSA, expose an MKULTRA — and the big ones always leak, because secrets don't hold across decades and rival nations. An emergent incentive gradient has no Sackler and no document, because the document was never written. There is nobody to depose.</p>
+    <div class="sec-kicker">01 — why it's hard to fight</div>
+    <h2>There's no villain. That's the problem.</h2>
+    <p>It's tempting to picture someone behind it all — a company, a cabal, a plan to keep you hooked. The truth is less dramatic and harder to beat: <strong>no one is actually in charge of this.</strong> Thousands of apps, each just trying to win a few more minutes of your day, add up to a machine that captures your attention even though nobody ever sat down and designed the machine.</p>
+    <p>That's worse than a conspiracy, not better. A conspiracy has a head you can cut off — you can expose it, sue it, switch it off. A system with no one at the wheel has nothing to depose. You can't fire an incentive. Which is why the only place this actually gets fixed is the one place you control: your own day.</p>
 
     <div class="reframe">
       <div class="toggle">
@@ -289,11 +321,11 @@
 
 <!-- CLOSE -->
 <section class="close reveal">
-  <div class="big">The sovereign self isn't taken by a cabal.<br>It's <em>surrendered by default</em>, a thousand times a day —<br>and reclaimed the same way.</div>
-  <p class="sub">Notice the response is identical whether it's a conspiracy or an emergent trap. That's the tell. The metaphysics of <em>who</em> is a distraction from the protocol.</p>
+  <div class="big">Your attention isn't stolen in one go.<br>It's <em>given away by default</em>, a hundred times a day —<br>and it's taken back the same way.</div>
+  <p class="sub">You don't need to know who's behind it, because the fix is the same either way: protect what comes in, starve the cheap rewards, and let your focus grow back. Start small. Start today.</p>
 </section>
 
-<footer>// real over impressive — built for marcus</footer>
+<footer>An essay on attention · share freely</footer>
 
 <script>
 /* ---------- content ---------- */
@@ -414,6 +446,29 @@ window.addEventListener('scroll',()=>{
 });
 const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')})},{threshold:.12});
 document.querySelectorAll('.reveal').forEach(e=>io.observe(e));
+
+// stat band reveal + count-up
+const fmt=(n,sep)=> sep? n.toLocaleString('en-US') : (''+n);
+const cio=new IntersectionObserver((es)=>{es.forEach(e=>{
+  if(!e.isIntersecting||e.target.dataset.done)return; e.target.dataset.done='1';
+  e.target.classList.add('in');
+  const el=e.target.querySelector('.statnum'), to=+el.dataset.to, suf=el.dataset.suffix||'', sep=el.dataset.sep;
+  const dur=1400, t0=performance.now();
+  (function tick(t){const p=Math.min(1,(t-t0)/dur), e2=1-Math.pow(1-p,3);
+    el.textContent=fmt(Math.round(to*e2),sep)+suf; if(p<1)requestAnimationFrame(tick);})(t0);
+})},{threshold:.55});
+document.querySelectorAll('.stat').forEach(e=>cio.observe(e));
+
+// safety net: never let scroll-reveal content stay hidden if observers misfire
+function revealAll(){
+  document.querySelectorAll('.reveal:not(.in)').forEach(e=>e.classList.add('in'));
+  document.querySelectorAll('.stat:not(.in)').forEach(e=>{
+    e.classList.add('in'); const n=e.querySelector('.statnum');
+    if(n&&!n.dataset.done){n.dataset.done='1';
+      n.textContent=(n.dataset.sep?(+n.dataset.to).toLocaleString('en-US'):n.dataset.to)+(n.dataset.suffix||'');}
+  });
+}
+window.addEventListener('load',()=>setTimeout(revealAll,2200));
 
 /* ---------- hero particle field (drifting signals) ---------- */
 const cv=document.getElementById('field'),ctx=cv.getContext('2d');
